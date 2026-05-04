@@ -3,139 +3,164 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms & Conditions — Folio</title>
+<title>Terms & Conditions — folio</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap');
 
+  /* ── folio Design Tokens (from folioTokens.swift) ── */
   :root {
-    --ink: #182A1E;
-    --ink-secondary: #2E4A3C;
-    --ink-muted: #6A9888;
-    --ink-faint: #96BCAC;
-    --paper: #F8FCF8;
-    --paper-tint: #EDF5EF;
-    --rule: rgba(125,181,160,0.25);
-    --accent-mint: #5A9E84;
-    --accent-mint-light: #7DB5A0;
+    --folio-bg-base:        #F7F4EC;
+    --folio-bg-elevated:    #FBFAF4;
+    --folio-bg-screen:      #F2F5EE;
+    --folio-mint-ghost:     #EAF0E6;
+    --folio-mint-pale:      #CAD8C6;
+    --folio-mint-light:     #AFC5B0;
+    --folio-mint-primary:   #789A80;
+    --folio-mint-deep:      #5F8168;
+    --folio-mint-dark:      #4F7059;
+    --folio-mint-darker:    #355A43;
+    --folio-mint-darkest:   #243F31;
+    --folio-text-primary:   #1F3529;
+    --folio-text-secondary: #395448;
+    --folio-text-tertiary:  #4D6658;
+    --folio-text-muted:     #73917C;
+    --folio-text-faint:     #9BA89E;
+    --folio-text-dim:       #B2BCAE;
+    /* derived */
+    --rule:       rgba(202,216,198,0.45);
+    --callout-bg: rgba(234,240,230,0.60);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--folio-bg-base);
+    color: var(--folio-text-primary);
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 17px;
-    line-height: 1.78;
+    font-size: 17.5px;
+    line-height: 1.80;
+    -webkit-font-smoothing: antialiased;
   }
 
   .page {
-    max-width: 740px;
+    max-width: 720px;
     margin: 0 auto;
-    padding: 64px 32px 120px;
+    padding: 72px 36px 120px;
   }
 
+  /* Masthead */
   .masthead {
-    border-bottom: 1px solid var(--rule);
+    margin-bottom: 52px;
     padding-bottom: 28px;
-    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .app-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
+  .app-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-mint);
-    margin-bottom: 12px;
+    color: var(--folio-mint-deep);
+    margin-bottom: 14px;
   }
 
   h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 40px;
+    font-size: 42px;
     font-weight: 300;
     font-style: italic;
-    line-height: 1.15;
-    color: var(--ink);
-    margin-bottom: 16px;
+    line-height: 1.12;
+    color: var(--folio-text-primary);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
   }
 
   .meta {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-faint);
-    letter-spacing: 0.05em;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    color: var(--folio-text-dim);
+    letter-spacing: 0.06em;
   }
 
-  section {
-    margin-bottom: 44px;
-  }
+  /* Sections */
+  section { margin-bottom: 48px; }
 
   h2 {
-    font-size: 10px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
     font-weight: 500;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--accent-mint);
-    margin-bottom: 16px;
-    padding-bottom: 8px;
+    color: var(--folio-mint-primary);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--rule);
   }
 
   h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 400;
     font-style: italic;
-    color: var(--ink);
-    margin: 24px 0 10px;
+    color: var(--folio-text-secondary);
+    margin: 28px 0 10px;
   }
 
   p {
-    color: var(--ink-secondary);
+    color: var(--folio-text-secondary);
     margin-bottom: 14px;
   }
 
   ul {
-    padding-left: 22px;
-    color: var(--ink-secondary);
+    padding-left: 20px;
+    color: var(--folio-text-secondary);
     margin-bottom: 14px;
   }
 
-  li { margin-bottom: 6px; }
+  li { margin-bottom: 7px; }
+
+  strong {
+    font-weight: 500;
+    color: var(--folio-text-primary);
+  }
 
   a {
-    color: var(--accent-mint);
+    color: var(--folio-mint-dark);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--folio-mint-pale);
   }
 
+  /* Callout */
   .callout {
-    background: rgba(125,181,160,0.08);
-    border-left: 2px solid var(--accent-mint-light);
-    padding: 16px 20px;
-    margin: 20px 0;
-    font-size: 15.5px;
-    color: var(--ink-secondary);
+    background: var(--callout-bg);
+    border-left: 2px solid var(--folio-mint-light);
+    border-radius: 0 6px 6px 0;
+    padding: 15px 20px;
+    margin: 22px 0;
+    font-size: 16px;
+    color: var(--folio-text-secondary);
+    line-height: 1.72;
   }
 
+  /* Footer */
   .footer-rule {
     border: none;
     border-top: 1px solid var(--rule);
-    margin: 60px 0 32px;
+    margin: 64px 0 28px;
   }
 
   .footer {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    color: var(--ink-faint);
-    letter-spacing: 0.08em;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    color: var(--folio-text-dim);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
   }
 
   .cn {
-    font-family: 'Noto Serif SC', serif;
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', STSong, serif;
     font-weight: 400;
   }
 </style>
@@ -144,132 +169,115 @@
 <div class="page">
 
   <div class="masthead">
-    <div class="app-name">Folio</div>
+    <div class="app-label">folio</div>
     <h1>Terms &amp; Conditions</h1>
     <div class="meta">Last updated: April 14, 2026 &nbsp;·&nbsp; Effective date: April 14, 2026</div>
   </div>
 
   <section>
     <h2>Agreement to Terms</h2>
-    <p>These Terms and Conditions ("Terms") govern your use of <strong>Folio</strong> (<span class="cn">生灵集</span>), an iOS application operated by an individual developer based in California, United States ("we," "us," or "our"). By downloading, installing, or using Folio, you agree to be bound by these Terms. If you do not agree, please do not use the app.</p>
-    <p>We reserve the right to update these Terms at any time. Continued use of the app after changes are posted constitutes your acceptance of the revised Terms. We will update the "Last updated" date at the top of this document when changes are made.</p>
+    <p>These Terms and Conditions ("Terms") govern your use of <strong>folio</strong>, an iOS application operated by an individual developer based in California, United States ("we," "us," or "our"). By downloading, installing, or using folio, you agree to be bound by these Terms. If you do not agree, please do not use the app.</p>
+    <p>We reserve the right to update these Terms at any time. Continued use of the app after changes are posted constitutes your acceptance of the revised Terms.</p>
   </section>
 
   <section>
     <h2>Eligibility</h2>
-    <p>Folio is intended for users who are at least 13 years of age. By using the app, you represent and warrant that you meet this age requirement. If you are under 18, you represent that your parent or guardian has reviewed and agreed to these Terms on your behalf.</p>
+    <p>folio is intended for users who are at least 13 years of age. By using the app, you represent that you meet this age requirement. If you are under 18, you represent that your parent or guardian has reviewed and agreed to these Terms on your behalf.</p>
   </section>
 
   <section>
     <h2>User-Generated Content</h2>
-    <p>Folio allows you to upload photos and write memory notes ("User Content"). By submitting User Content, you represent that:</p>
+    <p>folio allows you to upload photos and write memory notes ("User Content"). By submitting User Content, you represent that:</p>
     <ul>
       <li>You own the content or have the necessary rights to submit it.</li>
-      <li>Your content does not violate any third-party rights, including intellectual property rights or privacy rights.</li>
+      <li>Your content does not violate any third-party rights, including intellectual property or privacy rights.</li>
       <li>Your content does not contain unlawful, harmful, or offensive material.</li>
     </ul>
-    <p>You retain ownership of your User Content. By uploading content to Folio, you grant us a limited, non-exclusive, royalty-free license to store, process, and display your content solely for the purpose of providing the Folio service to you.</p>
-    <p>We do not claim ownership over your photos or notes. We will not use your personal User Content for any purpose beyond operating the app.</p>
+    <p>You retain ownership of your User Content. By uploading content to folio, you grant us a limited, non-exclusive, royalty-free license to store, process, and display your content solely for the purpose of providing the folio service to you.</p>
 
     <h3>DMCA / Copyright Infringement</h3>
-    <p>We respect intellectual property rights. If you believe that content on Folio infringes your copyright, please send a notice to our designated Copyright Agent at <a href="mailto:folio.foraging@gmail.com">folio.foraging@gmail.com</a> with the following information:</p>
-    <ul>
-      <li>A description of the copyrighted work you claim has been infringed.</li>
-      <li>A description of where the allegedly infringing material is located within the app.</li>
-      <li>Your contact information (name, address, phone number, email).</li>
-      <li>A statement that you have a good faith belief that the use is not authorized by the copyright owner.</li>
-      <li>A statement, under penalty of perjury, that the information in your notice is accurate and that you are the copyright owner or authorized to act on their behalf.</li>
-      <li>Your physical or electronic signature.</li>
-    </ul>
+    <p>If you believe that content on folio infringes your copyright, please send a notice to <a href="mailto:folio.foraging@gmail.com">folio.foraging@gmail.com</a> including: a description of the copyrighted work; the location of the allegedly infringing material; your contact information; a good faith belief statement; and your physical or electronic signature. We will respond promptly to valid DMCA notices.</p>
   </section>
 
   <section>
     <h2>In-App Purchases &amp; Subscriptions</h2>
 
     <h3>Subscription Plans</h3>
-    <p>Folio offers optional paid subscription plans that unlock unlimited species identifications. Subscriptions are available on a monthly or annual basis and are processed through Apple's in-app purchase system.</p>
+    <p>folio offers optional paid subscription plans that unlock unlimited species identifications. Subscriptions are available on a monthly or annual basis and are processed through Apple's in-app purchase system.</p>
 
     <h3>Free Trial</h3>
-    <p>We may offer a free trial period for paid subscription plans. At the end of the free trial, your subscription will automatically renew at the applicable subscription price unless you cancel before the trial period ends. You will not be charged during the free trial.</p>
+    <p>We may offer a free trial period for paid subscriptions. At the end of the trial, your subscription will automatically renew at the applicable price unless cancelled before the trial ends.</p>
 
     <h3>One-Time Purchases</h3>
-    <p>Folio may also offer one-time purchases (such as a lifetime membership). These are non-recurring charges processed through Apple's in-app purchase system.</p>
+    <p>folio may offer one-time purchases (such as a lifetime membership). These are non-recurring charges processed through Apple's in-app purchase system.</p>
 
     <h3>Billing &amp; Cancellation</h3>
-    <p>All purchases are processed by Apple. Your subscription will automatically renew unless cancelled at least 24 hours before the end of the current billing period. You can manage and cancel your subscription at any time through your Apple ID account settings. We are not responsible for any charges resulting from failure to cancel before a renewal date.</p>
-    <p>Refunds are handled in accordance with Apple's refund policies. We do not issue refunds directly.</p>
+    <p>Your subscription renews automatically unless cancelled at least 24 hours before the end of the current billing period. You can manage or cancel your subscription through your Apple ID account settings. Refunds are handled in accordance with Apple's refund policies — we do not issue refunds directly.</p>
 
     <h3>Price Changes</h3>
-    <p>We reserve the right to change subscription pricing at any time. We will provide reasonable notice of any price changes. Continued use of a subscription after a price change takes effect constitutes your acceptance of the new price.</p>
+    <p>We reserve the right to change subscription pricing with reasonable notice. Continued use after a price change takes effect constitutes acceptance of the new price.</p>
   </section>
 
   <section>
     <h2>Intellectual Property</h2>
-    <p>All content, features, and functionality of Folio — including but not limited to the app's name, logo, visual design, watercolor portraits generated by the app, UI elements, typography, and trademarks — are the exclusive property of the developer and are protected by applicable intellectual property laws.</p>
-    <p>You may not copy, modify, distribute, sell, or lease any part of our app or its content, nor may you reverse engineer or attempt to extract the source code of the app, without our explicit written permission.</p>
-    <p>The watercolor portraits ("小像 / Portraits") generated by Folio based on your submitted photos are owned by us. You are granted a personal, non-transferable license to use, save, and share these portraits for personal, non-commercial purposes.</p>
+    <p>All content, features, and functionality of folio — including the app's name, logo, visual design, watercolor portraits generated by the app, UI elements, and trademarks — are the exclusive property of the developer and are protected by applicable intellectual property laws.</p>
+    <p>You may not copy, modify, distribute, sell, or lease any part of our app or its content, nor reverse engineer or attempt to extract the source code, without our explicit written permission.</p>
+    <p>Watercolor portraits generated by folio from your submitted photos are owned by us. You are granted a personal, non-transferable license to save and share these portraits for personal, non-commercial purposes.</p>
   </section>
 
   <section>
     <h2>Promotions &amp; Contests</h2>
-    <p>From time to time, we may offer promotions, contests, or sweepstakes through Folio or our social media channels. Any such promotions will be governed by their own specific rules, which will be made available at the time of the promotion. By participating, you agree to those rules as well as these Terms.</p>
+    <p>From time to time, we may offer promotions, contests, or sweepstakes through folio or our social media channels. Any such promotions will be governed by their own specific rules, which will be made available at the time of the promotion.</p>
   </section>
 
   <section>
     <h2>Feedback &amp; Suggestions</h2>
-    <p>We welcome feedback, ideas, and suggestions about Folio. If you submit feedback or suggestions to us — whether through the app, by email, or through any other channel — you agree that we may use, implement, and build upon your feedback without any obligation to compensate you or provide credit. You waive any rights you may have in such feedback to the fullest extent permitted by law.</p>
+    <p>If you submit feedback or suggestions to us, you agree that we may use and implement your feedback without any obligation to compensate you or provide credit. You waive any rights you may have in such feedback to the fullest extent permitted by law.</p>
   </section>
 
   <section>
     <h2>Prohibited Uses</h2>
-    <p>You agree not to use Folio to:</p>
+    <p>You agree not to use folio to:</p>
     <ul>
       <li>Violate any applicable local, state, national, or international law or regulation.</li>
       <li>Upload content that is unlawful, harmful, threatening, abusive, defamatory, or otherwise objectionable.</li>
       <li>Attempt to gain unauthorized access to any part of the app or its related systems.</li>
       <li>Use automated scripts or bots to interact with the app.</li>
-      <li>Interfere with or disrupt the integrity or performance of the app or its services.</li>
-      <li>Engage in any conduct that restricts or inhibits anyone's use or enjoyment of the app.</li>
+      <li>Interfere with or disrupt the integrity or performance of the app.</li>
     </ul>
   </section>
 
   <section>
     <h2>Disclaimer of Warranties</h2>
-    <p>Folio is provided on an "as is" and "as available" basis without warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
-    <p>We do not warrant that the app will be uninterrupted, error-free, or free of viruses or other harmful components. Species identification results are provided for informational and entertainment purposes only and should not be relied upon for scientific, medical, or safety-critical decisions.</p>
+    <p>folio is provided on an "as is" and "as available" basis without warranties of any kind, express or implied. We do not warrant that the app will be uninterrupted or error-free. Species identification results are provided for informational and personal enjoyment purposes only and should not be relied upon for scientific, medical, or safety-critical decisions.</p>
   </section>
 
   <section>
     <h2>Limitation of Liability</h2>
-    <p>To the fullest extent permitted by applicable law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages — including loss of data, loss of profits, or any other intangible losses — arising out of or relating to your use of, or inability to use, Folio.</p>
-    <p>Our total liability to you for any claim arising out of or relating to these Terms or the app shall not exceed the amount you paid us in the twelve months preceding the claim, or $10, whichever is greater.</p>
+    <p>To the fullest extent permitted by applicable law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of folio. Our total liability for any claim shall not exceed the amount you paid us in the twelve months preceding the claim, or $10, whichever is greater.</p>
   </section>
 
   <section>
     <h2>Governing Law</h2>
-    <p>These Terms are governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in California.</p>
+    <p>These Terms are governed by the laws of the State of California, United States, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in California.</p>
   </section>
 
   <section>
     <h2>Termination</h2>
-    <p>We reserve the right to suspend or terminate your access to Folio at our sole discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason.</p>
-    <p>You may stop using Folio at any time. Deletion of your account can be requested by contacting us at <a href="mailto:folio.foraging@gmail.com">folio.foraging@gmail.com</a>.</p>
+    <p>We reserve the right to suspend or terminate your access to folio at our sole discretion for conduct that violates these Terms or is harmful to other users, us, or third parties. You may stop using folio at any time and request account deletion by contacting <a href="mailto:folio.foraging@gmail.com">folio.foraging@gmail.com</a>.</p>
   </section>
 
   <section>
     <h2>Contact</h2>
-    <p>If you have any questions about these Terms, please contact us:</p>
     <div class="callout">
-      <strong>Folio (<span class="cn">生灵集</span>)</strong><br>
+      <strong>folio</strong><br>
       Email: <a href="mailto:folio.foraging@gmail.com">folio.foraging@gmail.com</a><br>
       Individual developer · California, United States
     </div>
   </section>
 
   <hr class="footer-rule">
-  <div class="footer">
-    Folio · Terms &amp; Conditions · Version 1.0 · April 2026
-  </div>
+  <div class="footer">folio &nbsp;·&nbsp; Terms &amp; Conditions &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; April 2026</div>
 
 </div>
 </body>

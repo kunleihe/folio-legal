@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>folio — The world waits to meet you.</title>
+<meta name="description" content="folio turns chance encounters with plants and animals into lasting memories. Photograph, identify, collect.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap');
+
+  :root {
+    --folio-bg-base:        #F7F4EC;
+    --folio-bg-elevated:    #FBFAF4;
+    --folio-bg-screen:      #F2F5EE;
+    --folio-mint-ghost:     #EAF0E6;
+    --folio-mint-pale:      #CAD8C6;
+    --folio-mint-light:     #AFC5B0;
+    --folio-mint-primary:   #789A80;
+    --folio-mint-deep:      #5F8168;
+    --folio-mint-dark:      #4F7059;
+    --folio-mint-darker:    #355A43;
+    --folio-mint-darkest:   #243F31;
+    --folio-text-primary:   #1F3529;
+    --folio-text-secondary: #395448;
+    --folio-text-tertiary:  #4D6658;
+    --folio-text-muted:     #73917C;
+    --folio-text-faint:     #9BA89E;
+    --folio-text-dim:       #B2BCAE;
+    --folio-amber:          #9C6F1E;
+    --folio-amber-pale:     #FBF0D0;
+    --rule:       rgba(202,216,198,0.45);
+    --callout-bg: rgba(234,240,230,0.60);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--folio-bg-base);
+    color: var(--folio-text-primary);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17.5px;
+    line-height: 1.80;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(247,244,236,0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  nav.scrolled { border-bottom-color: var(--rule); }
+
+  .nav-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--folio-mint-deep);
+    text-decoration: none;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--folio-text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--folio-mint-deep); }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--folio-bg-elevated);
+    background: var(--folio-mint-dark);
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 100px;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--folio-mint-darker); }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    padding: 80px 64px 80px 80px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--folio-mint-primary);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--folio-mint-pale);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 58px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--folio-text-primary);
+    line-height: 1.08;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--folio-text-muted);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .hero-body {
+    font-size: 17px;
+    color: var(--folio-text-secondary);
+    max-width: 400px;
+    margin-bottom: 44px;
+    line-height: 1.72;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--folio-bg-elevated);
+    background: var(--folio-mint-dark);
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 100px;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 14px rgba(79,112,89,0.28), 0 1px 3px rgba(79,112,89,0.16);
+  }
+
+  .btn-primary:hover {
+    background: var(--folio-mint-darker);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--folio-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--folio-mint-pale);
+    cursor: pointer;
+  }
+
+  /* ── Hero right: specimen card mockup ── */
+  .hero-right {
+    background: var(--folio-bg-screen);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 48px;
+    position: relative;
+    overflow: hidden;
+    border-left: 1px solid var(--rule);
+  }
+
+  /* Faint ruled lines */
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 31px,
+      rgba(175,197,176,0.10) 31px,
+      rgba(175,197,176,0.10) 32px
+    );
+    pointer-events: none;
+  }
+
+  .specimen-card {
+    background: var(--folio-bg-elevated);
+    border: 1px solid rgba(202,216,198,0.60);
+    border-radius: 16px;
+    padding: 32px;
+    width: 280px;
+    position: relative;
+    box-shadow:
+      0 8px 32px rgba(31,53,41,0.08),
+      0 2px 6px rgba(31,53,41,0.05);
+    animation: float 5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+  }
+
+  .card-portrait {
+    width: 100%;
+    height: 220px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--folio-mint-ghost), var(--folio-mint-pale));
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Watercolor circle suggestion */
+  .card-portrait::before {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(121,154,128,0.35) 0%, rgba(175,197,176,0.15) 60%, transparent 100%);
+    border-radius: 50%;
+  }
+
+  .card-portrait-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--folio-text-muted);
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+  }
+
+  .card-rarity {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--folio-mint-dark);
+    background: rgba(121,154,128,0.12);
+    border: 1px solid rgba(95,129,104,0.30);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--folio-text-primary);
+    margin-bottom: 4px;
+  }
+
+  .card-sci {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--folio-text-faint);
+    margin-bottom: 16px;
+  }
+
+  .card-divider {
+    height: 1px;
+    background: var(--rule);
+    margin-bottom: 14px;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .card-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--folio-text-dim);
+  }
+
+  .card-meta-value {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    color: var(--folio-text-tertiary);
+  }
+
+  /* floating second card */
+  .specimen-card-back {
+    position: absolute;
+    width: 260px;
+    height: 160px;
+    background: var(--folio-bg-elevated);
+    border: 1px solid rgba(202,216,198,0.50);
+    border-radius: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-70%, -60%) rotate(-6deg);
+    box-shadow: 0 4px 16px rgba(31,53,41,0.06);
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .specimen-card-back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--folio-mint-ghost) 0%, transparent 60%);
+    opacity: 0.5;
+  }
+
+  .specimen-card { position: relative; z-index: 1; }
+
+  .hero-screenshot {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    border-radius: 28px;
+    box-shadow:
+      0 24px 60px rgba(31,53,41,0.18),
+      0 4px 12px rgba(31,53,41,0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Divider ── */
+  .section-divider {
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── Features ── */
+  .features {
+    padding: 96px 80px;
+  }
+
+  .features-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--folio-mint-primary);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .features-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--folio-text-primary);
+    text-align: center;
+    margin-bottom: 72px;
+    line-height: 1.10;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .feature {
+    padding: 32px;
+    background: var(--folio-bg-elevated);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--callout-bg);
+    border: 1px solid var(--folio-mint-pale);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .feature-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--folio-mint-deep);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .feature h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--folio-text-primary);
+    margin-bottom: 10px;
+  }
+
+  .feature p {
+    font-size: 16px;
+    color: var(--folio-text-tertiary);
+    line-height: 1.68;
+  }
+
+  /* ── Rarity tiers ── */
+  .rarity {
+    padding: 96px 80px;
+    background: var(--folio-bg-screen);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rarity-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--folio-mint-primary);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .rarity-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--folio-text-primary);
+    text-align: center;
+    margin-bottom: 64px;
+    line-height: 1.10;
+  }
+
+  .rarity-tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .tier {
+    padding: 24px 20px;
+    border-radius: 12px;
+    border: 1px solid;
+    text-align: center;
+  }
+
+  .tier-1 { background: rgba(115,145,124,0.07); border-color: rgba(115,145,124,0.24); }
+  .tier-2 { background: rgba(79,112,89,0.09); border-color: rgba(79,112,89,0.30); }
+  .tier-3 { background: rgba(30,122,136,0.08); border-color: rgba(30,122,136,0.30); }
+  .tier-4 { background: rgba(156,111,30,0.08); border-color: rgba(156,111,30,0.32); }
+
+  .tier-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+  }
+
+  .tier-1 .tier-dot { background: var(--folio-text-muted); }
+  .tier-2 .tier-dot { background: var(--folio-mint-dark); }
+  .tier-3 .tier-dot { background: #1E7A88; }
+  .tier-4 .tier-dot { background: var(--folio-amber); }
+
+  .tier-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .tier-1 .tier-name { color: var(--folio-text-muted); }
+  .tier-2 .tier-name { color: var(--folio-mint-dark); }
+  .tier-3 .tier-name { color: #1E7A88; }
+  .tier-4 .tier-name { color: var(--folio-amber); }
+
+  .tier-cn {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--folio-text-tertiary);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .tier-desc {
+    font-size: 13.5px;
+    color: var(--folio-text-faint);
+    line-height: 1.55;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 112px 80px;
+    text-align: center;
+  }
+
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--folio-mint-primary);
+    margin-bottom: 20px;
+  }
+
+  .cta-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--folio-text-primary);
+    margin-bottom: 16px;
+    line-height: 1.10;
+  }
+
+  .cta-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--folio-text-muted);
+    margin-bottom: 44px;
+  }
+
+  .cta-section .btn-primary {
+    font-size: 11px;
+    padding: 16px 36px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .footer-wordmark {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--folio-text-dim);
+  }
+
+  .footer-tagline {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--folio-text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--folio-text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--folio-text-muted); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 32px 48px; }
+    .hero-right { min-height: 420px; border-left: none; border-top: 1px solid var(--rule); }
+    .features { padding: 64px 32px; }
+    .features-grid { grid-template-columns: 1fr; gap: 20px; }
+    .rarity { padding: 64px 32px; }
+    .rarity-tiers { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cta-section { padding: 72px 32px; }
+    .cta-heading { font-size: 38px; }
+    footer { padding: 24px 32px; flex-direction: column; gap: 16px; text-align: center; }
+    nav { padding: 16px 24px; }
+    .nav-right .nav-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-wordmark">folio</a>
+  <div class="nav-right">
+    <a href="#features" class="nav-link">How it works</a>
+    <a href="#rarity" class="nav-link">Encounters</a>
+    <a href="folio-support.html" class="nav-link">Support</a>
+    <a href="#download" class="nav-cta">Download</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available on iOS</div>
+    <h1>The world waits<br>to meet you.</h1>
+    <p class="hero-body">Competitors give you an answer. folio gives you a memory. Every chance encounter with a plant or animal becomes a watercolor portrait, a story, a moment kept.</p>
+    <div class="hero-actions">
+      <a href="#download" class="btn-primary" id="download">
+        <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        Download on App Store
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <img src="images/result-view.jpg" alt="folio result view" class="hero-screenshot">
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="features-eyebrow">How it works</div>
+  <div class="features-heading">A new way to see<br>what's always been there.</div>
+
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M20.94 11A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06z"/></svg>
+      </div>
+      <h3>Photograph</h3>
+      <p>Point your camera at any plant or animal. folio identifies the species in seconds — no expertise required.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <h3>Collect</h3>
+      <p>Each encounter generates a unique watercolor portrait. Your growing collection becomes a personal field journal unlike any other.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </div>
+      <h3>Share</h3>
+      <p>Turn your encounter into a shareable field card — a botanical specimen aesthetic, not a screenshot. Made to be passed on.</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- Rarity tiers -->
+<section class="rarity" id="rarity">
+  <div class="rarity-eyebrow">Encounter Index</div>
+  <div class="rarity-heading">Every meeting has<br>its own weight.</div>
+  <div class="rarity-tiers">
+    <div class="tier tier-1">
+      <div class="tier-dot"></div>
+      <div class="tier-name">Common Find</div>
+      <div class="tier-desc">Always around. You just finally looked.</div>
+    </div>
+    <div class="tier tier-2">
+      <div class="tier-dot"></div>
+      <div class="tier-name">Seasonal Find</div>
+      <div class="tier-desc">Only shows up in its own season.</div>
+    </div>
+    <div class="tier tier-3">
+      <div class="tier-dot"></div>
+      <div class="tier-name">Rare Find</div>
+      <div class="tier-desc">Not every walk ends like this.</div>
+    </div>
+    <div class="tier tier-4">
+      <div class="tier-dot"></div>
+      <div class="tier-name">Fated Find</div>
+      <div class="tier-desc">Many passed by. You're the one who saw it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-eyebrow">Available now on iOS</div>
+  <div class="cta-heading">Step outside.</div>
+  <div class="cta-sub">Something is already waiting.</div>
+  <a href="#" class="btn-primary">
+    <svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;fill:currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+    Download on App Store
+  </a>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-wordmark">folio</span>
+    <span class="footer-tagline">The world waits to meet you.</span>
+  </div>
+  <div class="footer-links">
+    <a href="folio-support.html">Support</a>
+    <a href="folio-privacy-policy.html">Privacy</a>
+    <a href="folio-terms-and-conditions.html">Terms</a>
+  </div>
+</footer>
+
+<script>
+  // Nav shadow on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+</script>
+
+</body>
+</html>
